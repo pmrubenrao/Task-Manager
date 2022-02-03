@@ -1,4 +1,5 @@
 # Task-Manager
+A simple task manager.
 
 ## Tech Stack
 
@@ -20,12 +21,6 @@ npm install
 
 ```
 npm run dev
-```
-
-### Compiles and minifies for production
-
-```
-npm run build
 ```
 
 ## License
