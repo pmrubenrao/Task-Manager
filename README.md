@@ -2,12 +2,11 @@
 A simple task manager.
 
 ## Tech Stack
-
-- Javascript
+- NodeJS
 - Mongoose
 - HTML/CSS
 - ES2017
-- NodeJS
+
 
 ## Project setup / Installation
 
