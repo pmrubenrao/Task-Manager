@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const Tasks = require('./task');
 // mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api', {
 //   useNewUrlParser: true,
 //   //   useCreateIndex: true,
@@ -113,6 +114,12 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
+// Delete yser tasks when user is removed
+userSchema.pre('remove', async function (next) {
+  const user = this;
+  await Tasks.deleteMany({ owner: user._id });
+  next();
+});
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
