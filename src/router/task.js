@@ -26,12 +26,41 @@ router.post('/tasks', auth, async (req, res) => {
   //   });
 });
 
+//GET /tasks?comlpeted=false
+// limit
+// GET /tasks?limit=1&skip=2
+// GET /tasks?sortBy=createdAt:desc
 router.get('/tasks', auth, async (req, res) => {
   try {
     // const tasks = await Tasks.find();
     // const tasks = await Tasks.find({ owner: req.user._id });
     //alternative
-    await req.user.populate(['tasks']);
+    const match = {};
+    const sort = {};
+
+    if (req.query.completed) {
+      match.completed = req.query.completed === 'true';
+    }
+
+    if (req.query.sortBy) {
+      const parts = req.query.sortBy.split(':');
+      sort[parts[0]] = parts[1] === 'desc' ? -1 : 1;
+      // console.log('sort', sort);
+    }
+
+    await req.user.populate({
+      path: 'tasks',
+      match: match,
+      options: {
+        limit: parseInt(req.query.limit),
+        skip: parseInt(req.query.skip),
+        sort: sort,
+        // sort: {
+        //   // createdAt: -1, //-1-->desc 1-->asc
+        //   // completed: 1,
+        // },
+      },
+    });
 
     // if (!tasks) {
     //   return res.status(404).send();
