@@ -14,26 +14,10 @@ const port = process.env.PORT || 3000;
 // app.use((req, res, next) => {
 //   res.status(503).send('Site is under maintenance...');
 // });
-const multer = require('multer');
-const upload = multer({
-  dest: 'upload',
-  limits: {
-    fileSize: 1000000,
-  },
-  fileFilter(req, file, cb) {
-    if (!file.originalname.match(/\.(doc|docx)/)) {
-      return cb(new Error('Please upload the Word Document'));
-    }
-    cb(undefined, true);
-    // cb(new Error('File must be a PDF'));
-    // cb(undefined, true);
-    // cb(undefined, false);
-  },
-});
 
-app.post('/upload', upload.single('upload'), (req, res) => {
-  res.send();
-});
+// const errorMiddleware = (req, res, next) => {
+//   throw new Error('From my middleware');
+// };
 
 app.use(express.json());
 
