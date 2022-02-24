@@ -1,12 +1,13 @@
 # Task-Manager
+
 A simple task manager.
 
 ## Tech Stack
+
 - NodeJS
 - Mongoose
 - HTML/CSS
 - ES2017
-
 
 ## Project setup / Installation
 
